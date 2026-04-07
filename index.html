@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diamond Dental – Chihuahua</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cream:      #FAF8F3;
+      --navy:       #0F2340;
+      --navy-dark:  #08172B;
+      --gold:       #B8922A;
+      --gold-light: #E8D5A3;
+      --gold-bg:    rgba(184,146,42,0.13);
+      --gold-border:rgba(184,146,42,0.35);
+      --white:      #FFFFFF;
+      --text:       #1A1A1A;
+      --muted:      #6B6B6B;
+      --border:     #E8E2D5;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── HERO ─────────────────────────────────────── */
+    .hero {
+      background: var(--navy);
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(184,146,42,0.15);
+      pointer-events: none;
+    }
+    .hero-ring-1 { width: 560px; height: 560px; top: -180px; right: -140px; }
+    .hero-ring-2 { width: 320px; height: 320px; bottom: -100px; left: 35%; }
+    .hero-ring-3 { width: 200px; height: 200px; top: 60%; right: 8%; border-color: rgba(184,146,42,0.08); }
+
+    .hero-left {
+      padding: 100px 64px 100px 72px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold-bg);
+      border: 1px solid var(--gold-border);
+      color: var(--gold-light);
+      font-size: 11.5px;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      padding: 6px 14px;
+      border-radius: 100px;
+      width: fit-content;
+      margin-bottom: 28px;
+      animation: fadeUp 0.55s ease both;
+    }
+    .badge-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(38px, 4.2vw, 58px);
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 20px;
+      animation: fadeUp 0.55s 0.08s ease both;
+    }
+    .hero-title em { font-style: italic; color: var(--gold-light); }
+
+    .hero-sub {
+      font-size: 16px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.52);
+      line-height: 1.7;
+      max-width: 380px;
+      margin-bottom: 44px;
+      animation: fadeUp 0.55s 0.16s ease both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      animation: fadeUp 0.55s 0.24s ease both;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 14px 26px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      text-decoration: none;
+      transition: background 0.18s, transform 0.14s;
+    }
+    .btn-primary:hover { background: #9A7820; transform: translateY(-1px); }
+
+    .btn-ghost {
+      background: transparent;
+      color: rgba(255,255,255,0.75);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      padding: 14px 26px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.18);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      text-decoration: none;
+      transition: border-color 0.18s, transform 0.14s;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.45); transform: translateY(-1px); }
+
+    .hero-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+      padding: 80px 72px 80px 24px;
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.055);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 340px;
+      animation: fadeUp 0.55s 0.18s ease both;
+    }
+
+    .rating-row {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 6px;
+    }
+    .rating-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 54px;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1;
+    }
+    .stars-col .stars { color: var(--gold); font-size: 17px; letter-spacing: 2px; }
+    .stars-col .stars-label { font-size: 11px; color: rgba(255,255,255,0.38); margin-top: 3px; }
+
+    .divider-gold { width: 36px; height: 1px; background: var(--gold); margin: 24px 0; }
+
+    .review-item { margin-bottom: 22px; }
+    .review-item:last-child { margin-bottom: 0; }
+    .review-text {
+      font-size: 13px;
+      font-style: italic;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.6;
+      margin-bottom: 7px;
+    }
+    .review-author { font-size: 12px; color: var(--gold-light); font-weight: 500; }
+
+    /* ─── SHARED SECTION SHELL ─────────────────────── */
+    .section { padding: 96px 72px; }
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 2.8vw, 40px);
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .section-desc {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 56px;
+    }
+
+    /* ─── SERVICES ─────────────────────────────────── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .service-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 28px 28px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 40px rgba(15,35,64,0.07);
+    }
+
+    .service-icon {
+      width: 50px; height: 50px;
+      background: #F5F0E8;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+    .service-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 9px;
+    }
+    .service-desc { font-size: 13.5px; color: var(--muted); line-height: 1.65; font-weight: 300; }
+
+    /* ─── WHY US ────────────────────────────────────── */
+    .why-section {
+      background: var(--navy);
+      padding: 96px 72px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .why-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 2.8vw, 40px);
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+    .why-title em { font-style: italic; color: var(--gold-light); }
+
+    .why-desc {
+      font-size: 15px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.48);
+      line-height: 1.7;
+      margin-bottom: 44px;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .stat { border-left: 2px solid var(--gold); padding-left: 16px; }
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+    .stat-label { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.4; }
+
+    .benefits-list { display: flex; flex-direction: column; gap: 14px; }
+
+    .benefit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .benefit-icon {
+      width: 38px; height: 38px;
+      background: var(--gold-bg);
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      flex-shrink: 0;
+    }
+    .benefit-title { font-size: 14px; font-weight: 500; color: var(--white); margin-bottom: 4px; }
+    .benefit-text { font-size: 12.5px; font-weight: 300; color: rgba(255,255,255,0.42); line-height: 1.55; }
+
+    /* ─── CTA ───────────────────────────────────────── */
+    .cta-section {
+      background: var(--gold);
+      padding: 80px 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .cta-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(24px, 2.4vw, 36px);
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.2;
+      max-width: 520px;
+    }
+    .cta-title em { font-style: italic; }
+
+    .btn-dark {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 16px 32px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: opacity 0.18s, transform 0.14s;
+    }
+    .btn-dark:hover { opacity: 0.82; transform: translateY(-1px); }
+
+    /* ─── FOOTER ────────────────────────────────────── */
+    footer {
+      background: var(--navy-dark);
+      padding: 44px 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--white);
+    }
+    .footer-brand span { color: var(--gold); }
+    .footer-info { font-size: 13px; color: rgba(255,255,255,0.38); text-align: center; line-height: 1.7; }
+    .footer-contact { font-size: 13px; color: rgba(255,255,255,0.45); text-align: right; line-height: 1.8; }
+    .footer-contact a { color: var(--gold-light); text-decoration: none; }
+    .footer-contact a:hover { text-decoration: underline; }
+
+    /* ─── ANIMATIONS ────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── RESPONSIVE ────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 72px 32px 36px; }
+      .hero-right { padding: 0 32px 72px; justify-content: flex-start; }
+      .hero-card { max-width: 100%; }
+      .section { padding: 72px 32px; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .why-section { grid-template-columns: 1fr; padding: 72px 32px; gap: 52px; }
+      .cta-section { padding: 64px 32px; }
+      footer { padding: 40px 32px; flex-direction: column; text-align: center; }
+      .footer-info, .footer-contact { text-align: center; }
+    }
+
+    @media (max-width: 560px) {
+      .hero-title { font-size: 34px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .cta-section { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-ring hero-ring-1"></div>
+    <div class="hero-ring hero-ring-2"></div>
+    <div class="hero-ring hero-ring-3"></div>
+
+    <div class="hero-left">
+      <span class="badge">
+        <span class="badge-dot"></span>
+        Chihuahua, Chih. &nbsp;·&nbsp; 4.9 ★ en Google
+      </span>
+      <h1 class="hero-title">Tu sonrisa,<br><em>nuestra prioridad</em></h1>
+      <p class="hero-sub">Atención dental profesional con trato humano, precios accesibles y materiales de calidad. La Dra. te acompaña en cada paso de tu tratamiento.</p>
+      <div class="hero-actions">
+        <a href="https://wa.me/526141510084" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Agendar cita
+        </a>
+        <a href="tel:6141510084" class="btn-ghost">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+          614 151 0084
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-card">
+        <div class="rating-row">
+          <span class="rating-number">4.9</span>
+          <div class="stars-col">
+            <div class="stars">★★★★★</div>
+            <div class="stars-label">74 reseñas verificadas</div>
+          </div>
+        </div>
+        <div class="divider-gold"></div>
+        <div class="review-item">
+          <p class="review-text">"La doctora es super amable y empática, genera mucha confianza. Ya van 3 muelas del juicio que me quita y todo super bien."</p>
+          <span class="review-author">— Eduardo M.</span>
+        </div>
+        <div class="review-item">
+          <p class="review-text">"Muy atenta, te explica muy bien el procedimiento. Instalaciones muy limpias y cuidadosa con el trato."</p>
+          <span class="review-author">— Lluvia F.</span>
+        </div>
+        <div class="review-item">
+          <p class="review-text">"Excelente precio, con diferentes opciones de tratamiento según lo necesario. Facilidad en agendar."</p>
+          <span class="review-author">— Abril L.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section">
+    <p class="section-label">Servicios</p>
+    <h2 class="section-title">Todo lo que tu salud<br>dental necesita</h2>
+    <p class="section-desc">Desde una limpieza de rutina hasta tratamientos especializados — con los materiales correctos y la atención que mereces.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🦷</div>
+        <p class="service-name">Limpiezas dentales</p>
+        <p class="service-desc">Eliminamos sarro y placa para mantener tu sonrisa sana. Rápido, cómodo y efectivo.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">✨</div>
+        <p class="service-name">Blanqueamiento</p>
+        <p class="service-desc">Recupera el tono natural de tus dientes con tratamientos seguros y resultados visibles.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔧</div>
+        <p class="service-name">Extracciones</p>
+        <p class="service-desc">Muelas del juicio y extracciones simples. La Dra. se mantiene en contacto durante tu recuperación.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">💎</div>
+        <p class="service-name">Restauraciones</p>
+        <p class="service-desc">Resinas, incrustaciones y coronas con materiales de calidad para que tu sonrisa dure.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🩺</div>
+        <p class="service-name">Tratamientos largos</p>
+        <p class="service-desc">Ortodoncia, endodoncia y más — con opción de plazos para que el costo no sea un obstáculo.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📋</div>
+        <p class="service-name">Consulta y diagnóstico</p>
+        <p class="service-desc">Revisión completa con varias opciones de tratamiento según lo que necesitas y tu presupuesto.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="why-section">
+    <div>
+      <p class="section-label" style="color: var(--gold-light);">¿Por qué elegirnos?</p>
+      <h2 class="why-title">Una dentista que<br><em>realmente escucha</em></h2>
+      <p class="why-desc">No somos un consultorio más. Aquí te explican cada procedimiento, cuidan tu comodidad y te ofrecen opciones reales de pago.</p>
+      <div class="stats-row">
+        <div class="stat">
+          <p class="stat-number">4.9</p>
+          <p class="stat-label">Calificación en Google</p>
+        </div>
+        <div class="stat">
+          <p class="stat-number">74+</p>
+          <p class="stat-label">Pacientes satisfechos</p>
+        </div>
+        <div class="stat">
+          <p class="stat-number">100%</p>
+          <p class="stat-label">Recomiendan la clínica</p>
+        </div>
+      </div>
+    </div>
+    <div class="benefits-list">
+      <div class="benefit-item">
+        <div class="benefit-icon">👩‍⚕️</div>
+        <div>
+          <p class="benefit-title">Trato humano y empático</p>
+          <p class="benefit-text">La Dra. genera confianza desde el primer momento y te acompaña antes, durante y después del tratamiento.</p>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">💰</div>
+        <div>
+          <p class="benefit-title">Precios accesibles con plazos</p>
+          <p class="benefit-text">Opciones de pago en tratamientos largos para que no tengas que posponer tu salud dental.</p>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">🏥</div>
+        <div>
+          <p class="benefit-title">Instalaciones limpias y equipadas</p>
+          <p class="benefit-text">Materiales de calidad, higiene impecable y equipo moderno en cada consulta.</p>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">📅</div>
+        <div>
+          <p class="benefit-title">Fácil de agendar</p>
+          <p class="benefit-text">Agenda por WhatsApp o llamada. Horario extendido hasta las 8 p.m. para que no te compliques.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2 class="cta-title">¿Listo para tu primera cita?<br><em>Tu sonrisa te lo agradecerá.</em></h2>
+    <a href="https://wa.me/526141510084" class="btn-dark">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      Escribir por WhatsApp
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">Diamond<span>Dental</span></div>
+    <div class="footer-info">
+      Av. de las Américas 3011, Fidel Velázquez<br>
+      Chihuahua, Chih. &nbsp;·&nbsp; Abierto hasta las 8 p.m.
+    </div>
+    <div class="footer-contact">
+      <a href="tel:6141510084">614 151 0084</a><br>
+      <a href="https://wa.me/526141510084">WhatsApp directo</a>
+    </div>
+  </footer>
+
+</body>
+</html>
