@@ -3,25 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Diamond Dental Chihuahua — Atención dental profesional con trato humano, precios accesibles y materiales de calidad. 4.9 estrellas en Google, 74+ pacientes satisfechos." />
+  <meta property="og:title" content="Diamond Dental – Chihuahua" />
+  <meta property="og:description" content="Tu sonrisa, nuestra prioridad. Limpiezas, blanqueamiento, extracciones, ortodoncia y más. Agenda por WhatsApp." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_MX" />
   <title>Diamond Dental – Chihuahua</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --cream:      #FAF8F3;
-      --navy:       #0F2340;
-      --navy-dark:  #08172B;
-      --gold:       #B8922A;
-      --gold-light: #E8D5A3;
-      --gold-bg:    rgba(184,146,42,0.13);
-      --gold-border:rgba(184,146,42,0.35);
-      --white:      #FFFFFF;
-      --text:       #1A1A1A;
-      --muted:      #6B6B6B;
-      --border:     #E8E2D5;
+      --cream:        #FAF8F3;
+      --cream-dark:   #F3EFE6;
+      --navy:         #0F2340;
+      --navy-dark:    #08172B;
+      --navy-mid:     #162D50;
+      --gold:         #B8922A;
+      --gold-light:   #E8D5A3;
+      --gold-pale:    #F5EDDA;
+      --gold-bg:      rgba(184,146,42,0.13);
+      --gold-border:  rgba(184,146,42,0.35);
+      --white:        #FFFFFF;
+      --text:         #1A1A1A;
+      --muted:        #6B6B6B;
+      --border:       #E8E2D5;
+      --shadow-sm:    0 2px 8px rgba(15,35,64,0.06);
+      --shadow-md:    0 8px 32px rgba(15,35,64,0.10);
+      --shadow-lg:    0 20px 60px rgba(15,35,64,0.14);
+      --radius-sm:    8px;
+      --radius-md:    14px;
+      --radius-lg:    20px;
+      --nav-h:        64px;
     }
 
     html { scroll-behavior: smooth; }
@@ -32,9 +50,163 @@
       color: var(--text);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* ─── HERO ─────────────────────────────────────── */
+    /* ─── SCROLL ANIMATIONS ──────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1),
+                  transform 0.65s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-32px);
+      transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1),
+                  transform 0.65s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal-left.is-visible { opacity: 1; transform: translateX(0); }
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(32px);
+      transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1),
+                  transform 0.65s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal-right.is-visible { opacity: 1; transform: translateX(0); }
+
+    /* Stagger helpers */
+    .stagger-1 { transition-delay: 0.05s; }
+    .stagger-2 { transition-delay: 0.13s; }
+    .stagger-3 { transition-delay: 0.21s; }
+    .stagger-4 { transition-delay: 0.29s; }
+    .stagger-5 { transition-delay: 0.37s; }
+    .stagger-6 { transition-delay: 0.45s; }
+
+    /* ─── NAVBAR ─────────────────────────────────────── */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--nav-h);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(20px, 5vw, 72px);
+      transition: background 0.3s, box-shadow 0.3s, transform 0.35s cubic-bezier(0.22,1,0.36,1);
+    }
+    .navbar.transparent { background: transparent; box-shadow: none; }
+    .navbar.solid {
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 var(--border), var(--shadow-sm);
+    }
+    .navbar.hidden { transform: translateY(-100%); }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(17px, 2vw, 20px);
+      font-weight: 600;
+      text-decoration: none;
+      line-height: 1;
+    }
+    .navbar.transparent .nav-logo { color: var(--white); }
+    .navbar.solid .nav-logo { color: var(--navy); }
+    .nav-logo-gold { color: var(--gold); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(16px, 2.5vw, 36px);
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13.5px;
+      font-weight: 400;
+      text-decoration: none;
+      transition: color 0.18s;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+    }
+    .navbar.transparent .nav-links a { color: rgba(255,255,255,0.72); }
+    .navbar.transparent .nav-links a:hover { color: var(--white); }
+    .navbar.solid .nav-links a { color: var(--muted); }
+    .navbar.solid .nav-links a:hover { color: var(--navy); }
+
+    .nav-cta {
+      background: var(--gold);
+      color: var(--white) !important;
+      padding: 9px 18px;
+      border-radius: var(--radius-sm);
+      font-weight: 500 !important;
+      transition: background 0.18s, transform 0.14s !important;
+      white-space: nowrap;
+    }
+    .nav-cta:hover { background: #9A7820 !important; transform: translateY(-1px); }
+
+    @media (max-width: 700px) {
+      .nav-links { display: none; }
+      .nav-links.mobile-only { display: flex; }
+    }
+    .nav-links.mobile-only {
+      display: none;
+      gap: 8px;
+    }
+    @media (max-width: 700px) {
+      .nav-links.mobile-only { display: flex; }
+      .nav-links.desktop-links { display: none; }
+    }
+
+    /* ─── FLOATING WHATSAPP ──────────────────────────── */
+    .fab-wa {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 99;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #25D366;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: fabIn 0.6s 1.2s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    .fab-wa:hover {
+      transform: scale(1.08) translateY(-2px);
+      box-shadow: 0 8px 28px rgba(37,211,102,0.5);
+    }
+    .fab-wa::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: #25D366;
+      animation: fabPulse 2.8s ease-in-out infinite;
+      z-index: -1;
+    }
+    @keyframes fabIn {
+      from { opacity: 0; transform: scale(0.6); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    @keyframes fabPulse {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50%       { transform: scale(1.35); opacity: 0; }
+    }
+
+    /* ─── HERO ─────────────────────────────────────────── */
     .hero {
       background: var(--navy);
       min-height: 100vh;
@@ -42,6 +214,18 @@
       grid-template-columns: 1fr 1fr;
       position: relative;
       overflow: hidden;
+      padding-top: var(--nav-h);
+    }
+
+    /* Animated gradient overlay */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 20% 60%, rgba(184,146,42,0.07) 0%, transparent 70%),
+                  radial-gradient(ellipse 50% 70% at 80% 20%, rgba(15,35,64,0.5) 0%, transparent 80%);
+      pointer-events: none;
+      z-index: 1;
     }
 
     .hero-ring {
@@ -49,13 +233,15 @@
       border-radius: 50%;
       border: 1px solid rgba(184,146,42,0.15);
       pointer-events: none;
+      will-change: transform;
+      transition: transform 0.12s linear;
     }
-    .hero-ring-1 { width: 560px; height: 560px; top: -180px; right: -140px; }
-    .hero-ring-2 { width: 320px; height: 320px; bottom: -100px; left: 35%; }
-    .hero-ring-3 { width: 200px; height: 200px; top: 60%; right: 8%; border-color: rgba(184,146,42,0.08); }
+    .hero-ring-1 { width: 620px; height: 620px; top: -200px; right: -160px; }
+    .hero-ring-2 { width: 360px; height: 360px; bottom: -120px; left: 32%; }
+    .hero-ring-3 { width: 220px; height: 220px; top: 55%; right: 6%; border-color: rgba(184,146,42,0.08); }
 
     .hero-left {
-      padding: 100px 64px 100px 72px;
+      padding: clamp(80px, 10vw, 120px) clamp(24px, 5vw, 64px) clamp(80px, 10vw, 100px) clamp(24px, 6vw, 72px);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -70,7 +256,7 @@
       background: var(--gold-bg);
       border: 1px solid var(--gold-border);
       color: var(--gold-light);
-      font-size: 11.5px;
+      font-size: clamp(10.5px, 1.1vw, 11.5px);
       font-weight: 500;
       letter-spacing: 0.07em;
       padding: 6px 14px;
@@ -79,281 +265,108 @@
       margin-bottom: 28px;
       animation: fadeUp 0.55s ease both;
     }
-    .badge-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; }
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: badgePulse 2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    @keyframes badgePulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(184,146,42,0.7); }
+      50%       { box-shadow: 0 0 0 5px rgba(184,146,42,0); }
+    }
 
     .hero-title {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(38px, 4.2vw, 58px);
+      font-size: clamp(36px, 4.2vw, 60px);
       font-weight: 600;
       color: var(--white);
-      line-height: 1.1;
-      margin-bottom: 20px;
-      animation: fadeUp 0.55s 0.08s ease both;
+      line-height: 1.08;
+      margin-bottom: 22px;
+      animation: fadeUp 0.55s 0.10s ease both;
     }
     .hero-title em { font-style: italic; color: var(--gold-light); }
 
     .hero-sub {
-      font-size: 16px;
+      font-size: clamp(14px, 1.5vw, 16.5px);
       font-weight: 300;
       color: rgba(255,255,255,0.52);
-      line-height: 1.7;
-      max-width: 380px;
+      line-height: 1.75;
+      max-width: 400px;
       margin-bottom: 44px;
-      animation: fadeUp 0.55s 0.16s ease both;
+      animation: fadeUp 0.55s 0.20s ease both;
     }
 
     .hero-actions {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
-      animation: fadeUp 0.55s 0.24s ease both;
+      animation: fadeUp 0.55s 0.30s ease both;
     }
 
+    /* ─── BUTTONS ──────────────────────────────────────── */
     .btn-primary {
       background: var(--gold);
       color: var(--white);
       font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
+      font-size: clamp(13px, 1.3vw, 14.5px);
       font-weight: 500;
-      padding: 14px 26px;
-      border-radius: 8px;
+      padding: 15px 28px;
+      border-radius: var(--radius-sm);
       border: none;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 9px;
       text-decoration: none;
-      transition: background 0.18s, transform 0.14s;
+      transition: background 0.18s, transform 0.14s, box-shadow 0.18s;
+      animation: ctaPulse 3s ease-in-out 1.5s infinite;
+      min-height: 44px;
     }
-    .btn-primary:hover { background: #9A7820; transform: translateY(-1px); }
+    .btn-primary:hover {
+      background: #9A7820;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(184,146,42,0.3);
+      animation: none;
+    }
+    @keyframes ctaPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(184,146,42,0); }
+      50%       { box-shadow: 0 0 0 8px rgba(184,146,42,0.2); }
+    }
 
     .btn-ghost {
       background: transparent;
       color: rgba(255,255,255,0.75);
       font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
+      font-size: clamp(13px, 1.3vw, 14.5px);
       font-weight: 400;
-      padding: 14px 26px;
-      border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.18);
+      padding: 15px 28px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255,255,255,0.20);
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 9px;
       text-decoration: none;
-      transition: border-color 0.18s, transform 0.14s;
+      transition: border-color 0.18s, color 0.18s, transform 0.14s;
+      min-height: 44px;
     }
-    .btn-ghost:hover { border-color: rgba(255,255,255,0.45); transform: translateY(-1px); }
-
-    .hero-right {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      z-index: 2;
-      padding: 80px 72px 80px 24px;
-    }
-
-    .hero-card {
-      background: rgba(255,255,255,0.055);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 20px;
-      padding: 40px 36px;
-      width: 100%;
-      max-width: 340px;
-      animation: fadeUp 0.55s 0.18s ease both;
-    }
-
-    .rating-row {
-      display: flex;
-      align-items: baseline;
-      gap: 14px;
-      margin-bottom: 6px;
-    }
-    .rating-number {
-      font-family: 'Playfair Display', serif;
-      font-size: 54px;
-      font-weight: 600;
+    .btn-ghost:hover {
+      border-color: rgba(255,255,255,0.50);
       color: var(--white);
-      line-height: 1;
+      transform: translateY(-2px);
     }
-    .stars-col .stars { color: var(--gold); font-size: 17px; letter-spacing: 2px; }
-    .stars-col .stars-label { font-size: 11px; color: rgba(255,255,255,0.38); margin-top: 3px; }
-
-    .divider-gold { width: 36px; height: 1px; background: var(--gold); margin: 24px 0; }
-
-    .review-item { margin-bottom: 22px; }
-    .review-item:last-child { margin-bottom: 0; }
-    .review-text {
-      font-size: 13px;
-      font-style: italic;
-      color: rgba(255,255,255,0.65);
-      line-height: 1.6;
-      margin-bottom: 7px;
-    }
-    .review-author { font-size: 12px; color: var(--gold-light); font-weight: 500; }
-
-    /* ─── SHARED SECTION SHELL ─────────────────────── */
-    .section { padding: 96px 72px; }
-    .section-label {
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 500;
-      margin-bottom: 14px;
-    }
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(28px, 2.8vw, 40px);
-      font-weight: 600;
-      color: var(--navy);
-      line-height: 1.15;
-      margin-bottom: 16px;
-    }
-    .section-desc {
-      font-size: 15px;
-      font-weight: 300;
-      color: var(--muted);
-      line-height: 1.7;
-      max-width: 520px;
-      margin-bottom: 56px;
-    }
-
-    /* ─── SERVICES ─────────────────────────────────── */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .service-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 32px 28px 28px;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .service-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 14px 40px rgba(15,35,64,0.07);
-    }
-
-    .service-icon {
-      width: 50px; height: 50px;
-      background: #F5F0E8;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      margin-bottom: 20px;
-    }
-    .service-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--navy);
-      margin-bottom: 9px;
-    }
-    .service-desc { font-size: 13.5px; color: var(--muted); line-height: 1.65; font-weight: 300; }
-
-    /* ─── WHY US ────────────────────────────────────── */
-    .why-section {
-      background: var(--navy);
-      padding: 96px 72px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .why-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(28px, 2.8vw, 40px);
-      font-weight: 600;
-      color: var(--white);
-      line-height: 1.15;
-      margin-bottom: 18px;
-    }
-    .why-title em { font-style: italic; color: var(--gold-light); }
-
-    .why-desc {
-      font-size: 15px;
-      font-weight: 300;
-      color: rgba(255,255,255,0.48);
-      line-height: 1.7;
-      margin-bottom: 44px;
-    }
-
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-    .stat { border-left: 2px solid var(--gold); padding-left: 16px; }
-    .stat-number {
-      font-family: 'Playfair Display', serif;
-      font-size: 30px;
-      font-weight: 600;
-      color: var(--white);
-      line-height: 1;
-      margin-bottom: 5px;
-    }
-    .stat-label { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.4; }
-
-    .benefits-list { display: flex; flex-direction: column; gap: 14px; }
-
-    .benefit-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 12px;
-      padding: 20px;
-    }
-    .benefit-icon {
-      width: 38px; height: 38px;
-      background: var(--gold-bg);
-      border-radius: 9px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 17px;
-      flex-shrink: 0;
-    }
-    .benefit-title { font-size: 14px; font-weight: 500; color: var(--white); margin-bottom: 4px; }
-    .benefit-text { font-size: 12.5px; font-weight: 300; color: rgba(255,255,255,0.42); line-height: 1.55; }
-
-    /* ─── CTA ───────────────────────────────────────── */
-    .cta-section {
-      background: var(--gold);
-      padding: 80px 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 40px;
-      flex-wrap: wrap;
-    }
-    .cta-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(24px, 2.4vw, 36px);
-      font-weight: 600;
-      color: var(--navy);
-      line-height: 1.2;
-      max-width: 520px;
-    }
-    .cta-title em { font-style: italic; }
 
     .btn-dark {
       background: var(--navy);
       color: var(--white);
       font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
+      font-size: clamp(13px, 1.3vw, 15px);
       font-weight: 500;
-      padding: 16px 32px;
-      border-radius: 8px;
+      padding: 16px 34px;
+      border-radius: var(--radius-sm);
       border: none;
       cursor: pointer;
       display: inline-flex;
@@ -362,97 +375,457 @@
       text-decoration: none;
       white-space: nowrap;
       flex-shrink: 0;
-      transition: opacity 0.18s, transform 0.14s;
+      transition: background 0.18s, transform 0.14s, box-shadow 0.18s;
+      min-height: 44px;
     }
-    .btn-dark:hover { opacity: 0.82; transform: translateY(-1px); }
+    .btn-dark:hover {
+      background: var(--navy-mid);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(15,35,64,0.3);
+    }
 
-    /* ─── FOOTER ────────────────────────────────────── */
+    /* ─── HERO RIGHT ────────────────────────────────────── */
+    .hero-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+      padding: clamp(40px, 6vw, 80px) clamp(24px, 6vw, 72px) clamp(40px, 6vw, 80px) 24px;
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.11);
+      border-radius: var(--radius-lg);
+      padding: clamp(28px, 4vw, 44px) clamp(24px, 3.5vw, 40px);
+      width: 100%;
+      max-width: 360px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      animation: fadeUp 0.65s 0.22s ease both;
+    }
+
+    .rating-row {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 6px;
+    }
+    .rating-number {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(46px, 5vw, 60px);
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1;
+    }
+    .stars-col .stars { color: var(--gold); font-size: 16px; letter-spacing: 2px; }
+    .stars-col .stars-label { font-size: 11px; color: rgba(255,255,255,0.38); margin-top: 4px; }
+
+    .divider-gold { width: 40px; height: 2px; background: var(--gold); margin: 24px 0; border-radius: 2px; }
+
+    .review-item { margin-bottom: 20px; }
+    .review-item:last-child { margin-bottom: 0; }
+    .review-text {
+      font-size: 13px;
+      font-style: italic;
+      color: rgba(255,255,255,0.62);
+      line-height: 1.65;
+      margin-bottom: 7px;
+    }
+    .review-author { font-size: 12px; color: var(--gold-light); font-weight: 500; }
+
+    /* ─── DOT GRID PATTERN ───────────────────────────── */
+    .dot-bg {
+      background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1.5' cy='1.5' r='1' fill='%23B8922A' fill-opacity='0.10'/%3E%3C/svg%3E");
+      background-size: 20px 20px;
+    }
+
+    /* ─── SECTION SHELL ──────────────────────────────── */
+    .section { padding: clamp(64px, 8vw, 104px) clamp(20px, 6vw, 72px); }
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(26px, 2.8vw, 42px);
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.12;
+      margin-bottom: 16px;
+    }
+    .section-desc {
+      font-size: clamp(14px, 1.4vw, 15.5px);
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 540px;
+      margin-bottom: 56px;
+    }
+    .section-header { margin-bottom: 0; }
+
+    /* ─── SERVICES ───────────────────────────────────── */
+    #servicios {
+      background: var(--cream);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 52px;
+    }
+
+    .service-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: clamp(24px, 3vw, 36px) clamp(20px, 2.5vw, 30px) clamp(22px, 2.5vw, 30px);
+      transition: transform 0.25s cubic-bezier(0.22,1,0.36,1),
+                  box-shadow 0.25s cubic-bezier(0.22,1,0.36,1),
+                  border-color 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s cubic-bezier(0.22,1,0.36,1);
+      border-radius: 3px 3px 0 0;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--gold-border);
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-icon {
+      width: 52px; height: 52px;
+      background: var(--gold-pale);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 20px;
+      transition: transform 0.2s;
+    }
+    .service-card:hover .service-icon { transform: scale(1.08); }
+
+    .service-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(16px, 1.6vw, 18.5px);
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 9px;
+    }
+    .service-desc {
+      font-size: clamp(13px, 1.2vw, 14px);
+      color: var(--muted);
+      line-height: 1.68;
+      font-weight: 300;
+    }
+
+    /* ─── WHY US ─────────────────────────────────────── */
+    .why-section {
+      background: var(--navy);
+      padding: clamp(64px, 8vw, 104px) clamp(20px, 6vw, 72px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(48px, 7vw, 88px);
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .why-section::before {
+      content: '';
+      position: absolute;
+      width: 480px; height: 480px;
+      border-radius: 50%;
+      border: 1px solid rgba(184,146,42,0.10);
+      top: -160px; right: -160px;
+      pointer-events: none;
+    }
+    .why-section::after {
+      content: '';
+      position: absolute;
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      border: 1px solid rgba(184,146,42,0.07);
+      bottom: -80px; left: 40%;
+      pointer-events: none;
+    }
+
+    .why-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(26px, 2.8vw, 42px);
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.12;
+      margin-bottom: 18px;
+    }
+    .why-title em { font-style: italic; color: var(--gold-light); }
+
+    .why-desc {
+      font-size: clamp(14px, 1.4vw, 15.5px);
+      font-weight: 300;
+      color: rgba(255,255,255,0.48);
+      line-height: 1.75;
+      margin-bottom: 48px;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .stat {
+      border-left: 3px solid var(--gold);
+      padding-left: 18px;
+    }
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label { font-size: 12px; color: rgba(255,255,255,0.42); line-height: 1.45; }
+
+    .benefits-list { display: flex; flex-direction: column; gap: 14px; position: relative; z-index: 1; }
+
+    .benefit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-left: 3px solid rgba(184,146,42,0.45);
+      border-radius: var(--radius-md);
+      padding: clamp(16px, 2vw, 22px);
+      transition: background 0.2s, border-left-color 0.2s;
+    }
+    .benefit-item:hover {
+      background: rgba(255,255,255,0.07);
+      border-left-color: var(--gold);
+    }
+    .benefit-icon {
+      width: 40px; height: 40px;
+      background: var(--gold-bg);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .benefit-title { font-size: clamp(13px, 1.3vw, 14.5px); font-weight: 500; color: var(--white); margin-bottom: 4px; }
+    .benefit-text { font-size: clamp(12px, 1.1vw, 13px); font-weight: 300; color: rgba(255,255,255,0.43); line-height: 1.58; }
+
+    /* ─── CTA ────────────────────────────────────────── */
+    .cta-section {
+      background: var(--gold);
+      padding: clamp(56px, 7vw, 88px) clamp(20px, 6vw, 72px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '◆';
+      position: absolute;
+      font-size: 220px;
+      color: rgba(255,255,255,0.06);
+      right: -20px;
+      bottom: -40px;
+      pointer-events: none;
+      line-height: 1;
+    }
+    .cta-section::after {
+      content: '◆';
+      position: absolute;
+      font-size: 100px;
+      color: rgba(255,255,255,0.05);
+      left: 50%;
+      top: -30px;
+      pointer-events: none;
+      line-height: 1;
+    }
+
+    .cta-content { position: relative; z-index: 1; }
+    .cta-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(15,35,64,0.6);
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+    .cta-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 2.5vw, 38px);
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.2;
+      max-width: 540px;
+    }
+    .cta-title em { font-style: italic; }
+    .cta-action { position: relative; z-index: 1; flex-shrink: 0; }
+
+    /* ─── FOOTER ─────────────────────────────────────── */
     footer {
       background: var(--navy-dark);
-      padding: 44px 72px;
+      padding: clamp(36px, 5vw, 52px) clamp(20px, 6vw, 72px);
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 24px;
     }
     .footer-brand {
       font-family: 'Playfair Display', serif;
-      font-size: 22px;
+      font-size: clamp(18px, 2vw, 22px);
       font-weight: 600;
       color: var(--white);
     }
     .footer-brand span { color: var(--gold); }
-    .footer-info { font-size: 13px; color: rgba(255,255,255,0.38); text-align: center; line-height: 1.7; }
-    .footer-contact { font-size: 13px; color: rgba(255,255,255,0.45); text-align: right; line-height: 1.8; }
-    .footer-contact a { color: var(--gold-light); text-decoration: none; }
-    .footer-contact a:hover { text-decoration: underline; }
+    .footer-info {
+      font-size: 13px;
+      color: rgba(255,255,255,0.38);
+      text-align: center;
+      line-height: 1.75;
+    }
+    .footer-contact {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      text-align: right;
+      line-height: 1.85;
+    }
+    .footer-contact a {
+      color: var(--gold-light);
+      text-decoration: none;
+      transition: color 0.18s;
+    }
+    .footer-contact a:hover { color: var(--gold); }
 
-    /* ─── ANIMATIONS ────────────────────────────────── */
+    /* ─── KEYFRAMES ──────────────────────────────────── */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(18px); }
+      from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ─── RESPONSIVE ────────────────────────────────── */
-    @media (max-width: 900px) {
+    /* ─── RESPONSIVE ─────────────────────────────────── */
+    @media (max-width: 960px) {
       .hero { grid-template-columns: 1fr; }
-      .hero-left { padding: 72px 32px 36px; }
-      .hero-right { padding: 0 32px 72px; justify-content: flex-start; }
+      .hero-left {
+        padding: clamp(60px, 8vw, 96px) clamp(20px, 5vw, 40px) 32px;
+      }
+      .hero-right {
+        padding: 0 clamp(20px, 5vw, 40px) clamp(56px, 7vw, 80px);
+        justify-content: flex-start;
+      }
       .hero-card { max-width: 100%; }
-      .section { padding: 72px 32px; }
       .services-grid { grid-template-columns: 1fr 1fr; }
-      .why-section { grid-template-columns: 1fr; padding: 72px 32px; gap: 52px; }
-      .cta-section { padding: 64px 32px; }
-      footer { padding: 40px 32px; flex-direction: column; text-align: center; }
-      .footer-info, .footer-contact { text-align: center; }
+      .why-section { grid-template-columns: 1fr; }
     }
 
-    @media (max-width: 560px) {
-      .hero-title { font-size: 34px; }
+    @media (max-width: 600px) {
       .services-grid { grid-template-columns: 1fr; }
       .stats-row { grid-template-columns: 1fr 1fr; }
       .cta-section { flex-direction: column; align-items: flex-start; }
+      .cta-section::before { font-size: 140px; }
+      footer { flex-direction: column; text-align: center; }
+      .footer-info, .footer-contact { text-align: center; }
+    }
+
+    @media (max-width: 400px) {
+      .hero-actions { flex-direction: column; }
+      .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
+    }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .reveal-left, .reveal-right { transition: none; opacity: 1; transform: none; }
+      .badge-dot, .fab-wa::before, .btn-primary, .hero-ring { animation: none; }
     }
   </style>
 </head>
 <body>
 
+  <!-- NAVBAR -->
+  <nav class="navbar transparent" id="navbar" aria-label="Navegación principal">
+    <a href="#hero" class="nav-logo">Diamond <span class="nav-logo-gold">Dental</span></a>
+    <ul class="nav-links desktop-links" aria-label="Menú">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#por-que">¿Por qué elegirnos?</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+      <li><a href="https://wa.me/526141510084" class="nav-cta" aria-label="Agendar cita por WhatsApp">Agendar cita</a></li>
+    </ul>
+    <ul class="nav-links mobile-only" aria-label="Menú móvil">
+      <li>
+        <a href="https://wa.me/526141510084" class="nav-cta" aria-label="WhatsApp">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          WhatsApp
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- FLOATING WHATSAPP -->
+  <a href="https://wa.me/526141510084" class="fab-wa" aria-label="Contactar por WhatsApp">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+  </a>
+
   <!-- HERO -->
-  <section class="hero">
-    <div class="hero-ring hero-ring-1"></div>
-    <div class="hero-ring hero-ring-2"></div>
-    <div class="hero-ring hero-ring-3"></div>
+  <section class="hero" id="hero" aria-label="Bienvenida">
+    <div class="hero-ring hero-ring-1" data-parallax="0.025"></div>
+    <div class="hero-ring hero-ring-2" data-parallax="-0.018"></div>
+    <div class="hero-ring hero-ring-3" data-parallax="0.040"></div>
 
     <div class="hero-left">
-      <span class="badge">
-        <span class="badge-dot"></span>
+      <span class="badge" aria-label="Ubicación y calificación">
+        <span class="badge-dot" aria-hidden="true"></span>
         Chihuahua, Chih. &nbsp;·&nbsp; 4.9 ★ en Google
       </span>
       <h1 class="hero-title">Tu sonrisa,<br><em>nuestra prioridad</em></h1>
       <p class="hero-sub">Atención dental profesional con trato humano, precios accesibles y materiales de calidad. La Dra. te acompaña en cada paso de tu tratamiento.</p>
       <div class="hero-actions">
-        <a href="https://wa.me/526141510084" class="btn-primary">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        <a href="https://wa.me/526141510084" class="btn-primary" aria-label="Agendar cita por WhatsApp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
           Agendar cita
         </a>
-        <a href="tel:6141510084" class="btn-ghost">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+        <a href="tel:6141510084" class="btn-ghost" aria-label="Llamar al 614 151 0084">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
           614 151 0084
         </a>
       </div>
     </div>
 
     <div class="hero-right">
-      <div class="hero-card">
+      <div class="hero-card" role="region" aria-label="Calificación y reseñas">
         <div class="rating-row">
-          <span class="rating-number">4.9</span>
+          <span class="rating-number" aria-label="4.9 de 5 estrellas">4.9</span>
           <div class="stars-col">
-            <div class="stars">★★★★★</div>
+            <div class="stars" aria-hidden="true">★★★★★</div>
             <div class="stars-label">74 reseñas verificadas</div>
           </div>
         </div>
-        <div class="divider-gold"></div>
+        <div class="divider-gold" aria-hidden="true"></div>
         <div class="review-item">
           <p class="review-text">"La doctora es super amable y empática, genera mucha confianza. Ya van 3 muelas del juicio que me quita y todo super bien."</p>
           <span class="review-author">— Eduardo M.</span>
@@ -470,89 +843,91 @@
   </section>
 
   <!-- SERVICES -->
-  <section class="section">
-    <p class="section-label">Servicios</p>
-    <h2 class="section-title">Todo lo que tu salud<br>dental necesita</h2>
-    <p class="section-desc">Desde una limpieza de rutina hasta tratamientos especializados — con los materiales correctos y la atención que mereces.</p>
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="service-icon">🦷</div>
+  <section class="section dot-bg" id="servicios" aria-labelledby="services-heading">
+    <div class="section-header">
+      <p class="section-label reveal">Servicios</p>
+      <h2 class="section-title reveal stagger-1" id="services-heading">Todo lo que tu salud<br>dental necesita</h2>
+      <p class="section-desc reveal stagger-2">Desde una limpieza de rutina hasta tratamientos especializados — con los materiales correctos y la atención que mereces.</p>
+    </div>
+    <div class="services-grid" role="list">
+      <article class="service-card reveal stagger-1" role="listitem">
+        <div class="service-icon" aria-hidden="true">🦷</div>
         <p class="service-name">Limpiezas dentales</p>
         <p class="service-desc">Eliminamos sarro y placa para mantener tu sonrisa sana. Rápido, cómodo y efectivo.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">✨</div>
+      </article>
+      <article class="service-card reveal stagger-2" role="listitem">
+        <div class="service-icon" aria-hidden="true">✨</div>
         <p class="service-name">Blanqueamiento</p>
         <p class="service-desc">Recupera el tono natural de tus dientes con tratamientos seguros y resultados visibles.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">🔧</div>
+      </article>
+      <article class="service-card reveal stagger-3" role="listitem">
+        <div class="service-icon" aria-hidden="true">🔧</div>
         <p class="service-name">Extracciones</p>
         <p class="service-desc">Muelas del juicio y extracciones simples. La Dra. se mantiene en contacto durante tu recuperación.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">💎</div>
+      </article>
+      <article class="service-card reveal stagger-4" role="listitem">
+        <div class="service-icon" aria-hidden="true">💎</div>
         <p class="service-name">Restauraciones</p>
         <p class="service-desc">Resinas, incrustaciones y coronas con materiales de calidad para que tu sonrisa dure.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">🩺</div>
+      </article>
+      <article class="service-card reveal stagger-5" role="listitem">
+        <div class="service-icon" aria-hidden="true">🩺</div>
         <p class="service-name">Tratamientos largos</p>
         <p class="service-desc">Ortodoncia, endodoncia y más — con opción de plazos para que el costo no sea un obstáculo.</p>
-      </div>
-      <div class="service-card">
-        <div class="service-icon">📋</div>
+      </article>
+      <article class="service-card reveal stagger-6" role="listitem">
+        <div class="service-icon" aria-hidden="true">📋</div>
         <p class="service-name">Consulta y diagnóstico</p>
         <p class="service-desc">Revisión completa con varias opciones de tratamiento según lo que necesitas y tu presupuesto.</p>
-      </div>
+      </article>
     </div>
   </section>
 
   <!-- WHY US -->
-  <section class="why-section">
+  <section class="why-section" id="por-que" aria-labelledby="why-heading">
     <div>
-      <p class="section-label" style="color: var(--gold-light);">¿Por qué elegirnos?</p>
-      <h2 class="why-title">Una dentista que<br><em>realmente escucha</em></h2>
-      <p class="why-desc">No somos un consultorio más. Aquí te explican cada procedimiento, cuidan tu comodidad y te ofrecen opciones reales de pago.</p>
-      <div class="stats-row">
-        <div class="stat">
-          <p class="stat-number">4.9</p>
+      <p class="section-label reveal-left" style="color: var(--gold-light);">¿Por qué elegirnos?</p>
+      <h2 class="why-title reveal-left stagger-1" id="why-heading">Una dentista que<br><em>realmente escucha</em></h2>
+      <p class="why-desc reveal-left stagger-2">No somos un consultorio más. Aquí te explican cada procedimiento, cuidan tu comodidad y te ofrecen opciones reales de pago.</p>
+      <div class="stats-row reveal-left stagger-3" role="list" aria-label="Estadísticas">
+        <div class="stat" role="listitem">
+          <p class="stat-number" data-count="4.9" data-decimals="1" aria-label="4.9 calificación">4.9</p>
           <p class="stat-label">Calificación en Google</p>
         </div>
-        <div class="stat">
-          <p class="stat-number">74+</p>
+        <div class="stat" role="listitem">
+          <p class="stat-number" data-count="74" data-suffix="+" aria-label="74 o más pacientes satisfechos">74+</p>
           <p class="stat-label">Pacientes satisfechos</p>
         </div>
-        <div class="stat">
-          <p class="stat-number">100%</p>
+        <div class="stat" role="listitem">
+          <p class="stat-number" data-count="100" data-suffix="%" aria-label="100% de recomendación">100%</p>
           <p class="stat-label">Recomiendan la clínica</p>
         </div>
       </div>
     </div>
-    <div class="benefits-list">
-      <div class="benefit-item">
-        <div class="benefit-icon">👩‍⚕️</div>
+    <div class="benefits-list" role="list" aria-label="Beneficios">
+      <div class="benefit-item reveal-right stagger-1" role="listitem">
+        <div class="benefit-icon" aria-hidden="true">👩‍⚕️</div>
         <div>
           <p class="benefit-title">Trato humano y empático</p>
           <p class="benefit-text">La Dra. genera confianza desde el primer momento y te acompaña antes, durante y después del tratamiento.</p>
         </div>
       </div>
-      <div class="benefit-item">
-        <div class="benefit-icon">💰</div>
+      <div class="benefit-item reveal-right stagger-2" role="listitem">
+        <div class="benefit-icon" aria-hidden="true">💰</div>
         <div>
           <p class="benefit-title">Precios accesibles con plazos</p>
           <p class="benefit-text">Opciones de pago en tratamientos largos para que no tengas que posponer tu salud dental.</p>
         </div>
       </div>
-      <div class="benefit-item">
-        <div class="benefit-icon">🏥</div>
+      <div class="benefit-item reveal-right stagger-3" role="listitem">
+        <div class="benefit-icon" aria-hidden="true">🏥</div>
         <div>
           <p class="benefit-title">Instalaciones limpias y equipadas</p>
           <p class="benefit-text">Materiales de calidad, higiene impecable y equipo moderno en cada consulta.</p>
         </div>
       </div>
-      <div class="benefit-item">
-        <div class="benefit-icon">📅</div>
+      <div class="benefit-item reveal-right stagger-4" role="listitem">
+        <div class="benefit-icon" aria-hidden="true">📅</div>
         <div>
           <p class="benefit-title">Fácil de agendar</p>
           <p class="benefit-text">Agenda por WhatsApp o llamada. Horario extendido hasta las 8 p.m. para que no te compliques.</p>
@@ -562,26 +937,149 @@
   </section>
 
   <!-- CTA -->
-  <section class="cta-section">
-    <h2 class="cta-title">¿Listo para tu primera cita?<br><em>Tu sonrisa te lo agradecerá.</em></h2>
-    <a href="https://wa.me/526141510084" class="btn-dark">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-      Escribir por WhatsApp
-    </a>
+  <section class="cta-section" id="contacto" aria-labelledby="cta-heading">
+    <div class="cta-content reveal-left">
+      <p class="cta-eyebrow">Tu primera cita te espera</p>
+      <h2 class="cta-title" id="cta-heading">¿Listo para sonreír<br>con confianza?<br><em>Tu sonrisa te lo agradecerá.</em></h2>
+    </div>
+    <div class="cta-action reveal-right stagger-2">
+      <a href="https://wa.me/526141510084" class="btn-dark" aria-label="Escribir por WhatsApp para agendar cita">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Escribir por WhatsApp
+      </a>
+    </div>
   </section>
 
   <!-- FOOTER -->
-  <footer>
+  <footer id="footer" role="contentinfo">
     <div class="footer-brand">Diamond<span>Dental</span></div>
     <div class="footer-info">
       Av. de las Américas 3011, Fidel Velázquez<br>
       Chihuahua, Chih. &nbsp;·&nbsp; Abierto hasta las 8 p.m.
     </div>
     <div class="footer-contact">
-      <a href="tel:6141510084">614 151 0084</a><br>
-      <a href="https://wa.me/526141510084">WhatsApp directo</a>
+      <a href="tel:6141510084" aria-label="Llamar al 614 151 0084">614 151 0084</a><br>
+      <a href="https://wa.me/526141510084" aria-label="Contactar por WhatsApp">WhatsApp directo</a>
     </div>
   </footer>
 
+  <script>
+    /* ─── NAVBAR: transparent ↔ solid + hide-on-scroll-down ─ */
+    (function () {
+      var nav = document.getElementById('navbar');
+      var lastY = 0;
+      var heroH = 0;
+
+      function measure() {
+        heroH = document.getElementById('hero').offsetHeight;
+      }
+      measure();
+      window.addEventListener('resize', measure, { passive: true });
+
+      window.addEventListener('scroll', function () {
+        var y = window.scrollY;
+
+        // Solid vs transparent
+        if (y > 60) {
+          nav.classList.remove('transparent');
+          nav.classList.add('solid');
+        } else {
+          nav.classList.add('transparent');
+          nav.classList.remove('solid');
+        }
+
+        // Hide on scroll down, show on scroll up
+        if (y > lastY && y > 200) {
+          nav.classList.add('hidden');
+        } else {
+          nav.classList.remove('hidden');
+        }
+        lastY = y;
+      }, { passive: true });
+    })();
+
+    /* ─── INTERSECTION OBSERVER: scroll animations ─────── */
+    (function () {
+      var selectors = '.reveal, .reveal-left, .reveal-right';
+      var els = document.querySelectorAll(selectors);
+
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+      els.forEach(function (el) { obs.observe(el); });
+    })();
+
+    /* ─── ANIMATED NUMBER COUNTERS ──────────────────────── */
+    (function () {
+      var counters = document.querySelectorAll('[data-count]');
+      if (!counters.length) return;
+
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var el = entry.target;
+          var target = parseFloat(el.dataset.count);
+          var decimals = parseInt(el.dataset.decimals || '0', 10);
+          var suffix = el.dataset.suffix || '';
+          var duration = 1400;
+          var startTime = null;
+
+          function step(ts) {
+            if (!startTime) startTime = ts;
+            var progress = Math.min((ts - startTime) / duration, 1);
+            // Ease out cubic
+            var eased = 1 - Math.pow(1 - progress, 3);
+            var current = eased * target;
+            el.textContent = current.toFixed(decimals) + suffix;
+            if (progress < 1) requestAnimationFrame(step);
+            else el.textContent = target.toFixed(decimals) + suffix;
+          }
+
+          requestAnimationFrame(step);
+          obs.unobserve(el);
+        });
+      }, { threshold: 0.5 });
+
+      counters.forEach(function (el) { obs.observe(el); });
+    })();
+
+    /* ─── PARALLAX: hero rings on mouse move ────────────── */
+    (function () {
+      var rings = document.querySelectorAll('[data-parallax]');
+      if (!rings.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      var cx = 0, cy = 0;
+      var tx = new Array(rings.length).fill(0);
+      var ty = new Array(rings.length).fill(0);
+      var cx2 = new Array(rings.length).fill(0);
+      var cy2 = new Array(rings.length).fill(0);
+      var raf;
+
+      document.addEventListener('mousemove', function (e) {
+        cx = (e.clientX / window.innerWidth  - 0.5) * 2;
+        cy = (e.clientY / window.innerHeight - 0.5) * 2;
+      }, { passive: true });
+
+      function animate() {
+        rings.forEach(function (ring, i) {
+          var factor = parseFloat(ring.dataset.parallax) * 120;
+          tx[i] = cx * factor;
+          ty[i] = cy * factor;
+          // Lerp for smoothness
+          cx2[i] += (tx[i] - cx2[i]) * 0.06;
+          cy2[i] += (ty[i] - cy2[i]) * 0.06;
+          ring.style.transform = 'translate(' + cx2[i].toFixed(2) + 'px,' + cy2[i].toFixed(2) + 'px)';
+        });
+        raf = requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+  </script>
 </body>
 </html>
